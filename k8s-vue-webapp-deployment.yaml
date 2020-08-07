@@ -1,0 +1,37 @@
+# [START container_vue_deployment]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vue-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vue-webapp
+  template:
+    metadata:
+      labels:
+        app: vue-webapp
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: vue-webapp
+        image: docker.io/olalab/vue-webapp:v1
+        ports:
+        - containerPort: 8080
+        # For Vue project, the environment variables were configured in project_folder/config/***.env.js file
+        # Rebuild app for any modification of varibles in ***.env.js file content
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vue-webapp-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: vue-webapp
+# [END container_vue_deployment]

@@ -1,0 +1,23 @@
+version: '3'
+services:
+  vue-webapp:
+    build: ./vue-webapp/
+    image: vue-webapp
+    container_name: vue-webapp
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+  node-apiserver:
+    build: ./node-apiserver/
+    image: node-apiserver
+    container_name: node-apiserver
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    links: 
+      - mongo
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports: 
+      - "27017:27017"
