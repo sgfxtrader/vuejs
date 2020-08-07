@@ -13,9 +13,9 @@ Authentication using OKTA JWT validation
 
 ### Instructions
 
-Do `git clone` this repository, you should have `node-js` folder.
+Do `git clone` this repository, you should have `vue-js` folder.
 
-> $ cd node-js
+> $ cd vue-js
 
 > $ npm install
 
